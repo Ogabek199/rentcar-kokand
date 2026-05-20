@@ -91,28 +91,34 @@
 .header__langs {
   display: flex;
   align-items: center;
-  gap: 6px;
   padding: 4px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.45);
 }
 
-.header__lang-btn {
+.header__lang-select {
   border: none;
   background: transparent;
   color: var(--color-text);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  padding: 6px 10px;
-  border-radius: 9999px;
-  line-height: 1;
+  padding: 4px 8px;
   cursor: pointer;
+  outline: none;
+  border-radius: 9999px;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
-.header__lang-btn.active {
-  background: rgba(229, 160, 13, 0.9);
-  color: #fff;
+.header__lang-select:focus {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.header__lang-select option {
+  background: #fff;
+  color: var(--color-text);
+  padding: 8px;
 }
 
 .header__phone {

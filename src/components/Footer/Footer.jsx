@@ -28,17 +28,19 @@ const Footer = () => {
               <p className="footer__desc">
                 {t("footer.description")}
               </p>
-              {/* <div className="footer__social">
-                <a href="https://t.me/rentcarkokand" target="_blank" rel="noreferrer" aria-label="Telegram">
+              <div className="footer__social">
+                <a href="https://t.me/RendcarQoqon" target="_blank" rel="noreferrer" aria-label="Telegram">
                   <i className="ri-telegram-line"></i>
                 </a>
+                {/* 
                 <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
                   <i className="ri-instagram-line"></i>
                 </a>
                 <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
                   <i className="ri-facebook-circle-line"></i>
-                </a>
-              </div> */}
+                </a> 
+                */}
+              </div>
             </div>
           </Col>
 
@@ -62,7 +64,7 @@ const Footer = () => {
               </li>
               <li>
                 <i className="ri-phone-line"></i>
-                <a href="tel:+998912008550">+998 91 200 85 50</a>
+                <a href="tel:+998776344747">+998 77 634 47 47</a>
               </li>
             </ul>
           </Col>

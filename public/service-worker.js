@@ -1,85 +1,74 @@
 /* eslint-disable no-restricted-globals */
-// Minimal service worker for CRA static hosting (no Workbox injection).
-// - Cache static assets (cache-first)
-// - Network-first for navigation, fallback to /offline.html
 
-const CACHE_VERSION = "v1";
+// Service worker versiyasini har gal yangilash
+const CACHE_VERSION = "v2"; 
 const STATIC_CACHE = `rentcar-static-${CACHE_VERSION}`;
 
+// Precache qilish uchun muhim fayllar
 const PRECACHE_URLS = [
   "/offline.html",
   "/manifest.json",
   "/robots.txt",
-  "/sitemap.xml",
 ];
 
 self.addEventListener("install", (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches
-      .open(STATIC_CACHE)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
-      .then(() => self.skipWaiting())
+    caches.open(STATIC_CACHE).then((cache) => cache.addAll(PRECACHE_URLS))
   );
 });
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    (async () => {
-      const keys = await caches.keys();
-      await Promise.all(
+    caches.keys().then((keys) => {
+      return Promise.all(
         keys
           .filter((k) => k.startsWith("rentcar-static-") && k !== STATIC_CACHE)
           .map((k) => caches.delete(k))
       );
-      await self.clients.claim();
-    })()
+    }).then(() => self.clients.claim())
   );
 });
 
-function isNavigationRequest(request) {
-  return request.mode === "navigate" || (request.method === "GET" && request.headers.get("accept")?.includes("text/html"));
-}
-
 self.addEventListener("fetch", (event) => {
   const { request } = event;
+
+  // GET so'rovlarini tahlil qilish
   if (request.method !== "GET") return;
 
-  // Network-first for SPA navigations
-  if (isNavigationRequest(request)) {
+  const url = new URL(request.url);
+
+  // 1. Navigation (HTML sahifalar) - Network-first, agar xato bo'lsa offline sahifa
+  if (request.mode === "navigate") {
     event.respondWith(
-      (async () => {
-        try {
-          const response = await fetch(request);
-          const cache = await caches.open(STATIC_CACHE);
-          cache.put(request, response.clone()).catch(() => {});
-          return response;
-        } catch (err) {
-          // Try cached page first, then offline fallback
-          const cached = await caches.match(request);
-          return cached || caches.match("/offline.html");
-        }
-      })()
+      fetch(request)
+        .catch(() => caches.match("/offline.html"))
     );
     return;
   }
 
-  // Cache-first for build assets and images/fonts
-  const url = new URL(request.url);
-  const isStaticAsset =
+  // 2. Statik assetlar (JS, CSS, Img) - Cache-first (yaxshilangan)
+  if (
     url.pathname.startsWith("/static/") ||
-    /\.(?:js|css|png|jpg|jpeg|webp|gif|svg|ico|woff2?|ttf|eot)$/.test(url.pathname);
-
-  if (isStaticAsset) {
+    /\.(?:js|css|png|jpg|jpeg|webp|gif|svg|ico)$/.test(url.pathname)
+  ) {
     event.respondWith(
-      (async () => {
-        const cached = await caches.match(request);
-        if (cached) return cached;
-        const response = await fetch(request);
-        const cache = await caches.open(STATIC_CACHE);
-        cache.put(request, response.clone()).catch(() => {});
-        return response;
-      })()
+      caches.match(request).then((cachedResponse) => {
+        // Agar cache bo'lsa, uni qaytar
+        if (cachedResponse) return cachedResponse;
+        
+        // Bo'lmasa, tarmoqdan yukla va cache'ga saqla
+        return fetch(request).then((networkResponse) => {
+          // Chunklar yuklanmaganda cache'ni ifloslantirmaslik uchun tekshiruv
+          if (networkResponse && networkResponse.status === 200) {
+            const responseToCache = networkResponse.clone();
+            caches.open(STATIC_CACHE).then((cache) => {
+              cache.put(request, responseToCache);
+            });
+          }
+          return networkResponse;
+        });
+      })
     );
   }
 });
-

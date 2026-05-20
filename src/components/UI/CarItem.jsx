@@ -8,6 +8,8 @@ import QuickViewModal from "./QuickViewModal";
 import { slugify } from "../../utils/slugify";
 import { useTranslation } from "../../i18n/LanguageContext";
 
+import malibu from "../../assets/all-images/cars-img/bmw-offer.png";
+
 const formatCurrency = (value) =>
   new Intl.NumberFormat("uz-UZ", {
     style: "decimal",
@@ -18,6 +20,16 @@ const CarItem = React.memo((props) => {
   const { t } = useTranslation();
   const { imgUrl, carName, automatic, price, rating = 4.8, slug } = props.item;
   
+  const [imgSrc, setImgSrc] = useState(imgUrl);
+  
+  const handleImgError = useCallback(() => {
+    setImgSrc(malibu);
+  }, []);
+
+  React.useEffect(() => {
+    setImgSrc(imgUrl);
+  }, [imgUrl]);
+
   // Narxlarni memoize qilish - faqat price o'zgarganda qayta hisoblash
   const { discounted, original } = useMemo(
     () => applyCarDiscount(price),
@@ -48,13 +60,14 @@ const CarItem = React.memo((props) => {
         <div className="car__item car__item--new">
           <div className="car__item-img-wrap">
             <img 
-              src={imgUrl} 
+              src={imgSrc} 
               alt={carName} 
               className="car__item-img" 
               loading="lazy"
               decoding="async"
               width="400"
               height="300"
+              onError={handleImgError}
             />
             <div className="car__item-price-tag">
               <div className="car__item-price-row">

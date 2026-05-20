@@ -1,17 +1,18 @@
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useEffect, useRef, Suspense, lazy } from "react";
 import { useLocation } from "react-router-dom";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Routers from "../../routers/Routers";
-import ScrollToTop from "../UI/ScrollToTop";
-import ScrollProgress from "../UI/ScrollProgress";
-import BottomNavbar from "../UI/BottomNavbar";
-import FloatingOrbits from "../UI/FloatingOrbits";
-import ChatMessageWidget from "../UI/ChatMessageWidget";
-// import FavoritesCounter from "../UI/FavoritesCounter";
 import { initScrollAnimations } from "../../utils/scrollAnimations";
 import { logError } from "../../utils/errorLogger";
+
+// Og'ir bo'lgan yoki darhol kerak bo'lmagan widgetlarni lazy load qilish
+const ScrollToTop = lazy(() => import("../UI/ScrollToTop"));
+const ScrollProgress = lazy(() => import("../UI/ScrollProgress"));
+const BottomNavbar = lazy(() => import("../UI/BottomNavbar"));
+const FloatingOrbits = lazy(() => import("../UI/FloatingOrbits"));
+const ChatMessageWidget = lazy(() => import("../UI/ChatMessageWidget"));
 
 const Layout = () => {
   const location = useLocation();
@@ -67,18 +68,23 @@ const Layout = () => {
 
   return (
     <Fragment>
-      <FloatingOrbits />
+      <Suspense fallback={null}>
+        <FloatingOrbits />
+      </Suspense>
       <div className="layout__wrap">
-        <ScrollProgress />
+        <Suspense fallback={null}>
+          <ScrollProgress />
+        </Suspense>
         <Header />
         <div className="layout__content">
           <Routers />
         </div>
         <Footer />
-        <ScrollToTop />
-        <ChatMessageWidget />
-        <BottomNavbar />
-        {/* <FavoritesCounter /> */}
+        <Suspense fallback={null}>
+          <ScrollToTop />
+          <ChatMessageWidget />
+          <BottomNavbar />
+        </Suspense>
       </div>
     </Fragment>
   );

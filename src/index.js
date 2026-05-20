@@ -23,6 +23,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { setupNetworkMonitoring } from "./utils/apiErrorHandler";
 import { LanguageProvider } from "./i18n/LanguageContext";
+import { FavoritesProvider } from "./context/FavoritesContext";
 
 // Network monitoring o'rnatish
 setupNetworkMonitoring();
@@ -39,9 +40,11 @@ root.render(
   <React.StrictMode>
     <HelmetProvider>
       <LanguageProvider>
-        <Router>
-          <App />
-        </Router>
+        <FavoritesProvider>
+          <Router>
+            <App />
+          </Router>
+        </FavoritesProvider>
       </LanguageProvider>
     </HelmetProvider>
   </React.StrictMode>

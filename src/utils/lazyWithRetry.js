@@ -7,9 +7,10 @@ function isChunkLoadError(error) {
   if (error.name === "ChunkLoadError") return true;
   const msg = String(error.message || error);
   return (
-    /loading chunk [\d]+ failed/i.test(msg) ||
+    /loading (css )?chunk [\d]+ failed/i.test(msg) ||
     /failed to fetch dynamically imported module/i.test(msg) ||
-    /importing a module script failed/i.test(msg)
+    /importing a module script failed/i.test(msg) ||
+    /error loading (css )?chunk/i.test(msg)
   );
 }
 

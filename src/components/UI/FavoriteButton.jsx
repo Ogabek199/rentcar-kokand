@@ -1,46 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { isFavorite, toggleFavorite, getLikesCount } from "../../utils/favorites";
+import React from "react";
+import { useFavorites } from "../../context/FavoritesContext";
 import "../../styles/favorite-button.css";
 
-const FavoriteButton = ({ carId, size = "medium", onToggle }) => {
-  const [favorited, setFavorited] = useState(false);
-  const [likesCount, setLikesCount] = useState(0);
-
-  useEffect(() => {
-    setFavorited(isFavorite(carId));
-    setLikesCount(getLikesCount(carId));
-  }, [carId]);
-
-  // Listen for favorite changes from other instances
-  useEffect(() => {
-    const handleFavoriteChange = (e) => {
-      if (e.detail.carId === carId) {
-        setFavorited(e.detail.favorited);
-        setLikesCount(getLikesCount(carId));
-      }
-    };
-    window.addEventListener("favoriteChanged", handleFavoriteChange);
-    return () => {
-      window.removeEventListener("favoriteChanged", handleFavoriteChange);
-    };
-  }, [carId]);
+const FavoriteButton = React.memo(({ carId, size = "medium", onToggle }) => {
+  const { isFavorite, toggleFavorite, getLikesCount } = useFavorites();
+  
+  const favorited = isFavorite(carId);
+  const likesCount = getLikesCount(carId);
 
   const handleToggle = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const newState = toggleFavorite(carId);
-    setFavorited(newState);
-    setLikesCount(getLikesCount(carId));
-
-    // Show notification to other components
-    const event = new CustomEvent("favoriteChanged", {
-      detail: { carId, favorited: newState },
-    });
-    window.dispatchEvent(event);
-
-    // Call optional callback
+    toggleFavorite(carId);
     if (onToggle) {
-      onToggle(newState);
+      onToggle(!favorited);
     }
   };
 
@@ -59,6 +32,8 @@ const FavoriteButton = ({ carId, size = "medium", onToggle }) => {
       </button>
     </div>
   );
-};
+});
+
+FavoriteButton.displayName = "FavoriteButton";
 
 export default FavoriteButton;

@@ -116,7 +116,7 @@ const ReviewFormInline = ({ onClose, onSubmit }) => {
           className="review-form-inline__input"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          placeholder="+998 91 200 85 50"
+          placeholder="+998 77 634 47 47"
         />
         <label className="review-form-inline__label">Baholash</label>
         <div className="review-form-inline__stars">
@@ -421,7 +421,7 @@ const CarDetails = () => {
                 <div className="need-help-card">
                   <h3 className="need-help-card__title">Yordam kerakmi?</h3>
                   <p className="need-help-card__text">Konsiyerj jamoamiz 24/7 maxsus so'rovlaringiz uchun xizmatda.</p>
-                  <a href="tel:+998912008550" className="need-help-card__btn">
+                  <a href="tel:+998776344747" className="need-help-card__btn">
                     <i className="ri-phone-line"></i>
                     Qo'llab-quvvatlash bilan bog'lanish →
                   </a>

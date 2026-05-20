@@ -170,8 +170,8 @@ const Contact = () => {
   const contactInfo = useMemo(
     () => ({
       address: t("contactPage.address"),
-      phone: "+998 91 200 85 50",
-      phoneLink: "tel:+998912008550",
+      phone: "+998 77 634 47 47",
+      phoneLink: "tel:+998776344747",
     }),
     [t]
   );
@@ -214,7 +214,7 @@ const Contact = () => {
                       name="telefon"
                       value={formData.telefon}
                       onChange={changeHandler}
-                      placeholder="+998 91 200 85 50"
+                      placeholder="+998 77 634 47 47"
                       disabled={isSubmitting}
                       className="contact-form__input"
                     />

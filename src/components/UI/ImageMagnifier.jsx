@@ -1,5 +1,6 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import "../../styles/image-magnifier.css";
+import fallbackImg from "../../assets/all-images/cars-img/bmw-offer.png";
 
 /**
  * Rasmdagidek doira (linza) ichida zoom – kursorni harakatlantirganda
@@ -12,10 +13,19 @@ const ImageMagnifier = ({
   lensSize = 160,
   className = "",
 }) => {
+  const [imgSrc, setImgSrc] = useState(src);
   const [lensStyle, setLensStyle] = useState(null);
   const [showLens, setShowLens] = useState(false);
   const containerRef = useRef(null);
   const imgRef = useRef(null);
+
+  useEffect(() => {
+    setImgSrc(src);
+  }, [src]);
+
+  const handleImgError = useCallback(() => {
+    setImgSrc(fallbackImg);
+  }, []);
 
   const handleMouseEnter = useCallback(() => setShowLens(true), []);
   const handleMouseLeave = useCallback(() => {
@@ -57,12 +67,12 @@ const ImageMagnifier = ({
         height: lensSize,
         marginLeft: -half,
         marginTop: -half,
-        backgroundImage: `url(${src})`,
+        backgroundImage: `url(${imgSrc})`,
         backgroundSize: `${bgSizeW}px ${bgSizeH}px`,
         backgroundPosition: `${posX}px ${posY}px`,
       });
     },
-    [src, zoomLevel, lensSize]
+    [imgSrc, zoomLevel, lensSize]
   );
 
   return (
@@ -75,12 +85,13 @@ const ImageMagnifier = ({
     >
       <img 
         ref={imgRef} 
-        src={src} 
+        src={imgSrc} 
         alt={alt} 
         className="image-magnifier__img" 
         draggable={false}
         loading="lazy"
         decoding="async"
+        onError={handleImgError}
       />
       {showLens && lensStyle && (
         <div

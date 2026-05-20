@@ -144,7 +144,7 @@ const ChatMessageWidget = () => {
               name="phone"
               value={formData.phone}
               onChange={onChange}
-              placeholder="+998 91 200 85 50"
+              placeholder="+998 77 634 47 47"
             />
 
             <label>{t("chatWidget.messageLabel")}</label>

@@ -55,20 +55,20 @@ const Header = () => {
           </nav>
 
           <div className="header__right">
-            <div className="header__langs" role="group" aria-label={t("header.language")}>
-              {["uz", "en", "ru"].map((langCode) => (
-                <button
-                  type="button"
-                  key={langCode}
-                  className={`header__lang-btn ${language === langCode ? "active" : ""}`}
-                  onClick={() => setLanguage(langCode)}
-                >
-                  {langCode.toUpperCase()}
-                </button>
-              ))}
+            <div className="header__langs">
+              <select
+                className="header__lang-select"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                aria-label={t("header.language")}
+              >
+                <option value="uz">🇺🇿 UZ</option>
+                <option value="en">🇬🇧 EN</option>
+                <option value="ru">🇷🇺 RU</option>
+              </select>
             </div>
-            <a href="tel:+998912008550" className="header__phone">
-              <i className="ri-phone-line"></i>+998 91 200 85 50
+            <a href="tel:+998776344747" className="header__phone">
+              <i className="ri-phone-line"></i>+998 77 634 47 47
             </a>
             <Link to="/contact" className="header__cta">
               {t("header.apply")}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ImageMagnifier from "./ImageMagnifier";
 import "../../styles/image-lightbox.css";
 
@@ -8,6 +8,14 @@ const ImageLightbox = ({ images, currentIndex = 0, onClose }) => {
   useEffect(() => {
     setActiveIndex(currentIndex);
   }, [currentIndex]);
+
+  const handleNext = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
+  const handlePrev = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -27,15 +35,7 @@ const ImageLightbox = ({ images, currentIndex = 0, onClose }) => {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
     };
-  }, [activeIndex]);
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
+  }, [activeIndex, onClose, handleNext, handlePrev]);
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {

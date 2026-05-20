@@ -22,6 +22,7 @@
     transparent 70%
   );
   animation: orbit-float 25s linear infinite;
+  will-change: transform;
 }
 
 .floating-orbits__orb--1 {

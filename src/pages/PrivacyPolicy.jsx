@@ -251,7 +251,7 @@ const PrivacyPolicy = () => {
               </p>
               <ul style={{ paddingLeft: "25px", marginBottom: "0" }}>
                 <li style={{ marginBottom: "10px", lineHeight: "1.7", color: "var(--color-text)" }}>
-                  <strong>Telefon:</strong> <a href="tel:+998912008550" style={{ color: "var(--color-primary)", textDecoration: "none" }}>+998 91 200 85 50</a>
+                  <strong>Telefon:</strong> <a href="tel:+998776344747" style={{ color: "var(--color-primary)", textDecoration: "none" }}>+998 77 634 47 47</a>
                 </li>
                 {/*<li style={{ marginBottom: "10px", lineHeight: "1.7", color: "var(--color-text)" }}>*/}
                 {/*  <strong>Elektron pochta:</strong> <a href="mailto:otaxonovogabek633@gmail.com" style={{ color: "var(--color-primary)", textDecoration: "none" }}>otaxonovogabek633@gmail.com</a>*/}

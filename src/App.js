@@ -1,18 +1,17 @@
-import { useEffect } from "react";
+import {useEffect} from "react";
 import Layout from "./components/Layout/Layout";
-import { setupGlobalErrorHandler, ErrorBoundary } from "./utils/errorLogger";
+import {setupGlobalErrorHandler, ErrorBoundary} from "./utils/errorLogger";
 
 function App() {
-  useEffect(() => {
-    // Global error handler o'rnatish
-    setupGlobalErrorHandler();
-  }, []);
+    useEffect(() => {
+        setupGlobalErrorHandler();
+    }, []);
 
-  return (
-    <ErrorBoundary>
-      <Layout />
-    </ErrorBoundary>
-  );
+    return (
+        <ErrorBoundary>
+            <Layout/>
+        </ErrorBoundary>
+    );
 }
 
 export default App;
