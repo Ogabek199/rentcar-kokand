@@ -3,6 +3,7 @@ import { Col } from "reactstrap";
 import "../../styles/blog-item.css";
 import { Link } from "react-router-dom";
 import blogData from "../../assets/data/blogData";
+import { slugify } from "../../utils/slugify";
 
 const BlogList = () => {
   return (
@@ -15,14 +16,15 @@ const BlogList = () => {
 };
 
 const BlogItem = ({ item }) => {
-  const { imgUrl, title, author, date, description, time } = item;
+  const { imgUrl, title, author, date, description, time, slug } = item;
+  const blogSlug = slug || slugify(title);
 
   return (
     <Col lg="4" md="6" sm="6" className="mb-5">
       <div className="blog__item">
         <img src={imgUrl} alt="" className="w-100" />
         <div className="blog__info p-3">
-          <Link to={`/blogs/${title}`} className="blog__title">
+          <Link to={`/blogs/${blogSlug}`} className="blog__title">
             {title}
           </Link>
           <p className="section__description mt-3">
@@ -31,7 +33,7 @@ const BlogItem = ({ item }) => {
               : description}
           </p>
 
-          <Link to={`/blogs/${title}`} className="read__more">
+          <Link to={`/blogs/${blogSlug}`} className="read__more">
             Ko'proq o'qish
           </Link>
 

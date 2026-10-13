@@ -1,0 +1,47 @@
+/* ========== Doira (linza) zoom – rasmdagidek magnifier ========== */
+.image-magnifier {
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+  cursor: none;
+}
+
+.image-magnifier__img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  user-select: none;
+  pointer-events: none;
+}
+
+.image-magnifier {
+  pointer-events: auto;
+}
+
+.image-magnifier__lens {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  background-repeat: no-repeat;
+  background-color: #fff;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.1s ease;
+}
+
+/* Rangli aksent (ixtiyoriy) */
+.image-magnifier__lens {
+  border-color: rgba(229, 160, 13, 0.4);
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(229, 160, 13, 0.2);
+}
+
+@media (max-width: 768px) {
+  .image-magnifier {
+    cursor: pointer;
+  }
+  .image-magnifier__lens {
+    border-width: 2px;
+  }
+}

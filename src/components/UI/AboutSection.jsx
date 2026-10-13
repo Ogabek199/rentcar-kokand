@@ -1,30 +1,19 @@
 import { Container, Row, Col } from "reactstrap";
 import "../../styles/about-section.css";
+import { useTranslation } from "../../i18n/LanguageContext";
 
-const features = [
-  {
-    icon: "ri-time-line",
-    title: "24/7 Qo'llab-quvvatlash",
-    text: "Jamoamiz har doim sizga yordam berishga tayyor - istalgan vaqtda, istalgan joyda.",
-  },
-  {
-    icon: "ri-price-tag-3-line",
-    title: "Eng yaxshi narxlar",
-    text: "Eng raqobatbardosh narxlarda premium va qulay tajriba kafolati.",
-  },
-  {
-    icon: "ri-checkbox-circle-line",
-    title: "Toza mashinalar",
-    text: "Har bir avtomobil ijaraga berilishidan oldin puxta dezinfeksiya qilinadi va yuviladi.",
-  },
-  {
-    icon: "ri-flashlight-line",
-    title: "Tez bron qilish",
-    text: "Orzuingizdagi mashinani 60 soniyadan kamroq vaqtda onlayn bron qiling.",
-  },
-];
+const TELEGRAM_URL = "https://t.me/RendcarQoqon";
 
 const AboutSection = ({ aboutClass }) => {
+  const { t } = useTranslation();
+  const features = [
+    { icon: "ri-car-line", title: t("aboutSection.f1t"), text: t("aboutSection.f1d") },
+    { icon: "ri-star-line", title: t("aboutSection.f2t"), text: t("aboutSection.f2d") },
+    { icon: "ri-contrast-2-line", title: t("aboutSection.f3t"), text: t("aboutSection.f3d") },
+    { icon: "ri-wallet-3-line", title: t("aboutSection.f4t"), text: t("aboutSection.f4d") },
+    { icon: "ri-time-line", title: t("aboutSection.f5t"), text: t("aboutSection.f5d") },
+  ];
+
   return (
     <section
       className="about__section about__section--new"
@@ -32,13 +21,13 @@ const AboutSection = ({ aboutClass }) => {
     >
       <Container>
         <div className="about__section-head text-center">
-          <h2 className="about__section-title">Har bir yolda mukammallik</h2>
-          <p className="about__section-sub">NIMA UCHUN BIZNI TANLAYDI</p>
+          <h2 className="about__section-title">{t("aboutSection.title")}</h2>
+          <p className="about__section-sub">{t("aboutSection.subtitle")}</p>
           <span className="about__section-line" />
         </div>
-        <Row className="about__section-cards">
+        <Row className="about__section-cards justify-content-center">
           {features.map((item, index) => (
-            <Col key={index} lg="3" md="6" sm="6" className="mb-4">
+            <Col key={index} lg="4" md="6" sm="6" className="mb-4">
               <div className="about__card">
                 <div className="about__card-icon">
                   <i className={item.icon}></i>
@@ -49,6 +38,21 @@ const AboutSection = ({ aboutClass }) => {
             </Col>
           ))}
         </Row>
+        <div className="about__section-meta">
+          <span className="about__section-meta-item">
+            <i className="ri-map-pin-line"></i>
+            {t("aboutSection.location")}
+          </span>
+          <a
+            href={TELEGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="about__section-meta-item about__section-meta-item--link"
+          >
+            <i className="ri-telegram-fill"></i>
+            {t("aboutSection.telegram")}
+          </a>
+        </div>
       </Container>
     </section>
   );

@@ -1,9 +1,11 @@
 /* TEAM */
-Developer: Og‘abek Otaxonov
-From: Farg‘ona vil., Kokand
-GitHub: github.com/Ogabek199
-Telegram: @otaxonov_o17
+Company: Ziyo Rent Car
+Location: Qo‘qon, Farg‘ona viloyati, O‘zbekiston
+Phone: +998776344747
+Telegram: https://t.me/RendcarQoqon
 
 /* SITE */
-Last update: 2025-07-11
-Software: React, Next, TailwindCSS, Node.js
+Last update: 2026-10-13
+Standards: HTML5, CSS3, Schema.org
+Software: React
+Language: uz

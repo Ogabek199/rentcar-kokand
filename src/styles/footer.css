@@ -1,8 +1,11 @@
-/* ========== New UI Footer (rasmdagi dizayn) ========== */
+/* ========== Footer ========== */
 .footer--new {
-  background: var(--color-dark);
-  padding: 56px 0 0;
+  background:
+    radial-gradient(700px 240px at 0% 0%, rgba(229, 160, 13, 0.14), transparent 55%),
+    linear-gradient(180deg, #161d2c 0%, #0f1420 100%);
+  padding: 64px 0 0;
   color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .footer__brand {
@@ -25,6 +28,16 @@
   font-size: 1.5rem;
 }
 
+.footer__logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: block;
+  background: #000;
+}
+
 .footer__desc {
   color: rgba(255, 255, 255, 0.75);
   font-size: 0.9rem;
@@ -38,18 +51,23 @@
 }
 
 .footer__social a {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.8);
+  color: #fff;
   font-size: 1.2rem;
-  transition: color 0.2s;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 
 .footer__social a:hover {
-  color: var(--color-primary);
+  background: var(--color-telegram);
+  border-color: transparent;
+  transform: translateY(-2px);
 }
 
 .footer__title {
@@ -112,21 +130,22 @@
 }
 
 .footer__map-placeholder {
-  background: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.06) 100%);
   border-radius: var(--radius);
-  padding: 32px 24px;
+  padding: 18px 16px;
   text-align: center;
   min-height: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .footer__map-placeholder span {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .footer__map-link {
@@ -139,6 +158,21 @@
 .footer__map-link:hover {
   color: var(--color-primary-dark);
   text-decoration: underline;
+}
+
+.footer__map-frame {
+  width: 100%;
+  height: 220px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.footer__map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .footer__bottom {
@@ -156,7 +190,7 @@
 
 @media (max-width: 768px) {
   .footer--new {
-    padding: 40px 0 0;
+    padding: 40px 0 80px;
   }
 
   .footer__brand {
@@ -165,5 +199,10 @@
 
   .footer__map-placeholder {
     min-height: 120px;
+    padding: 14px 12px;
+  }
+
+  .footer__map-frame {
+    height: 180px;
   }
 }

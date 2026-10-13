@@ -7,12 +7,12 @@ const PrivacyPolicy = () => {
   return (
     <Helmet
       title="Maxfiylik siyosati"
-      description="Ziyo Rent Car maxfiylik siyosati: shaxsiy ma’lumotlar qanday to‘planadi, ishlatiladi va himoya qilinadi. Cookie’lar, huquqlar va bog‘lanish ma’lumotlari."
+      description="Ziyo Rent Car maxfiylik siyosati: shaxsiy ma’lumotlar, cookie’lar va foydalanuvchi huquqlari. Bog‘lanish: +998776344747, Telegram @RendcarQoqon."
       canonicalPath="/privacy-policy"
     >
       <CommonSection title="Maxfiylik siyosati" />
       
-      <section style={{ padding: "60px 0" }}>
+      <section style={{ padding: "60px 0" }} className="animate-on-scroll animate-fade-in-up">
         <Container>
           <div style={{ maxWidth: "900px", margin: "0 auto" }}>
             <div style={{ marginBottom: "30px" }}>
@@ -251,11 +251,11 @@ const PrivacyPolicy = () => {
               </p>
               <ul style={{ paddingLeft: "25px", marginBottom: "0" }}>
                 <li style={{ marginBottom: "10px", lineHeight: "1.7", color: "var(--color-text)" }}>
-                  <strong>Telefon:</strong> <a href="tel:+998937120057" style={{ color: "var(--color-primary)", textDecoration: "none" }}>+998 93 712 00 57</a>
+                  <strong>Telefon:</strong> <a href="tel:+998776344747" style={{ color: "var(--color-primary)", textDecoration: "none" }}>+998776344747</a>
                 </li>
-                <li style={{ marginBottom: "10px", lineHeight: "1.7", color: "var(--color-text)" }}>
-                  <strong>Elektron pochta:</strong> <a href="mailto:otaxonovogabek633@gmail.com" style={{ color: "var(--color-primary)", textDecoration: "none" }}>otaxonovogabek633@gmail.com</a>
-                </li>
+                {/*<li style={{ marginBottom: "10px", lineHeight: "1.7", color: "var(--color-text)" }}>*/}
+                {/*  <strong>Elektron pochta:</strong> <a href="mailto:otaxonovogabek633@gmail.com" style={{ color: "var(--color-primary)", textDecoration: "none" }}>otaxonovogabek633@gmail.com</a>*/}
+                {/*</li>*/}
                 <li style={{ marginBottom: "10px", lineHeight: "1.7", color: "var(--color-text)" }}>
                   <strong>Manzil:</strong> Qo'qon shahar, Farg'ona viloyati, O'zbekiston
                 </li>

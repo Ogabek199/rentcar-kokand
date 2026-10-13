@@ -6,10 +6,20 @@ import blogData from "../assets/data/blogData.js";
 import Helmet from "../components/Helmet/Helmet";
 import { Link } from "react-router-dom";
 import "../styles/blog-details.css";
+import { slugify } from "../utils/slugify";
 
 const BlogDetails = () => {
   const { slug } = useParams();
-  const blog = blogData.find((blog) => blog.title === slug);
+  const raw = String(slug ?? "");
+  const decoded = (() => {
+    try {
+      return decodeURIComponent(raw);
+    } catch {
+      return raw;
+    }
+  })();
+
+  const blog = blogData.find((b) => (b.slug || slugify(b.title)) === raw) || blogData.find((b) => b.title === decoded);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,15 +42,30 @@ const BlogDetails = () => {
     <Helmet
       title={blog.title}
       description={blog.description}
-      canonicalPath={`/blogs/${encodeURIComponent(blog.title)}`}
+      canonicalPath={`/blogs/${blog.slug || slugify(blog.title)}`}
       image={blog.imgUrl}
       type="article"
+      structuredData={{
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: blog.title,
+        image: blog.imgUrl ? [blog.imgUrl] : undefined,
+        author: blog.author
+          ? { "@type": "Person", name: blog.author }
+          : undefined,
+        publisher: {
+          "@type": "Organization",
+          name: "Ziyo Rent Car",
+        },
+        datePublished: blog.date,
+        description: blog.description,
+      }}
     >
-      <section>
+      <section className="animate-page-enter">
         <Container>
           <Row>
             <Col lg="8" md="8">
-              <div className="blog__details">
+              <div className="blog__details animate-on-scroll animate-fade-in-up">
                 <img src={blog.imgUrl} alt="" className="w-100" />
                 <h2 className="section__title mt-4">{blog.title}</h2>
 
@@ -104,7 +129,7 @@ const BlogDetails = () => {
                   <div className="recent__blog-item d-flex gap-3">
                     <img src={item.imgUrl} alt="" className="w-25 rounded-2" />
                     <h6>
-                      <Link to={`/blogs/${item.title}`}>{blog.title}</Link>
+                      <Link to={`/blogs/${item.slug || slugify(item.title)}`}>{item.title}</Link>
                     </h6>
                   </div>
                 </div>

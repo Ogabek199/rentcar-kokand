@@ -1,0 +1,218 @@
+/* ========== Bottom Navigation Bar (Mobile) ========== */
+.bottom-navbar {
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 1000;
+  display: none;
+  padding: 8px 12px;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom));
+  background: rgba(26, 26, 26, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  max-width: calc(100% - 24px);
+  margin: 0 auto;
+}
+
+.bottom-navbar__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  gap: 2px;
+  padding: 0;
+}
+
+.bottom-navbar__item {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 2px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  min-height: 50px;
+}
+
+.bottom-navbar__item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bottom-navbar__item:active::before {
+  opacity: 1;
+}
+
+.bottom-navbar__icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bottom-navbar__item i {
+  font-size: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.bottom-navbar__label {
+  font-size: 0.6rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-align: center;
+  line-height: 1.1;
+}
+
+/* Active State */
+.bottom-navbar__item.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 46px;
+}
+
+.bottom-navbar__item.active::before {
+  opacity: 0;
+}
+
+.bottom-navbar__item.active .bottom-navbar__icon-wrapper {
+  transform: scale(1.1);
+}
+
+.bottom-navbar__item.active i {
+  color: #4A9EFF;
+  filter: drop-shadow(0 2px 4px rgba(74, 158, 255, 0.3));
+}
+
+.bottom-navbar__item.active .bottom-navbar__label {
+  color: #4A9EFF;
+  font-weight: 600;
+}
+
+/* Hover Effects */
+.bottom-navbar__item:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bottom-navbar__item:hover:not(.active) .bottom-navbar__icon-wrapper {
+  transform: scale(1.05);
+}
+
+/* Mobile - header navigation ishlatiladi, bottom navbar yopiq */
+@media (max-width: 768px) {
+  .bottom-navbar {
+    display: none !important;
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+}
+
+/* Small Mobile - 6 items compact */
+@media (max-width: 480px) {
+  .bottom-navbar {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: calc(100% - 20px);
+    padding: 6px 6px;
+    padding-bottom: calc(6px + env(safe-area-inset-bottom));
+    border-radius: 20px;
+  }
+
+  .bottom-navbar__container {
+    gap: 0;
+  }
+
+  .bottom-navbar__item {
+    padding: 4px 1px;
+    min-height: 48px;
+    gap: 1px;
+  }
+
+  .bottom-navbar__icon-wrapper {
+    width: 22px;
+    height: 22px;
+  }
+
+  .bottom-navbar__item i {
+    font-size: 1.1rem;
+  }
+
+  .bottom-navbar__label {
+    font-size: 0.55rem;
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+}
+
+/* Very Small Screens - 6 items */
+@media (max-width: 360px) {
+  .bottom-navbar {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    max-width: calc(100% - 16px);
+    padding: 5px 4px;
+    padding-bottom: calc(5px + env(safe-area-inset-bottom));
+    border-radius: 16px;
+  }
+
+  .bottom-navbar__container {
+    padding: 0;
+    gap: 0;
+  }
+
+  .bottom-navbar__item {
+    padding: 3px 0;
+    min-height: 44px;
+  }
+
+  .bottom-navbar__icon-wrapper {
+    width: 20px;
+    height: 20px;
+  }
+
+  .bottom-navbar__item i {
+    font-size: 1rem;
+  }
+
+  .bottom-navbar__label {
+    font-size: 0.5rem;
+  }
+}
+
+/* Header mobileda ochiq qoladi */

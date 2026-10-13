@@ -1,10 +1,11 @@
 const carData = [
   {
     id: 1,
+    slug: "chevrolet-malibu",
     brand: "Malibu",
     rating: 112,
     carName: "Chevrolet Malibu",
-    imgUrl: "https://asacar.uz/uploads/car_color/KK/KK/KE/1632743563.png",
+    imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBOO9opiQN_k_3OFD7IzSMVUlrtvNglwR5sw&s",
     model: "premier",
     price: 980000,
     speed: "240km",
@@ -17,6 +18,7 @@ const carData = [
 
   {
     id: 2,
+    slug: "chevrolet-jentra",
     brand: "Jentra",
     rating: 102,
     carName: "Chevrolet Jentra",
@@ -33,10 +35,11 @@ const carData = [
 
   {
     id: 3,
+    slug: "chevrolet-equinox",
     brand: "Equinox",
     rating: 132,
     carName: "Chevrolet Equinox",
-    imgUrl: "https://asacar.uz/uploads/car_color/KK/KK/K4/1632489639.png",
+    imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzCuUWU59EcnrHdD5C_NlwqoN5jD38EbJYg&s",
     model: "Model-2022",
     price: 1150000,
     speed: "220km",
@@ -49,6 +52,7 @@ const carData = [
 
   {
     id: 4,
+    slug: "chevrolet-onix",
     brand: "Onix",
     rating: 102,
     carName: "Chevrolet Onix",
@@ -65,6 +69,7 @@ const carData = [
 
   {
     id: 5,
+    slug: "chevrolet-tahoe",
     brand: "Tahoe",
     rating: 94,
     carName: "Chevrolet Tahoe",
@@ -81,6 +86,7 @@ const carData = [
 
   {
     id: 6,
+    slug: "chevrolet-captiva",
     brand: "Captiva",
     rating: 119,
     carName: "Chevrolet Captiva",

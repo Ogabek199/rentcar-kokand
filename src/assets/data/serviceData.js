@@ -11,7 +11,7 @@ const serviceData = [
     title: "Butun shahar bo'ylab sayohat",
     icon: "ri-community-line",
     desc: "Shahar bo‘ylab bemalol harakatlaning, eng yaxshi joylarni kashf eting va sayohatingizdan zavq oling.",
-  },
+  }, 
 
   {
     id: 3,

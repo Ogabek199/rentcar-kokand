@@ -6,34 +6,36 @@
 
 .prices-promo {
   display: flex;
-  gap: 14px;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
   background: #fff;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 18px 18px;
-  margin-bottom: 22px;
+  padding: 28px 24px;
+  margin-bottom: 36px;
   border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .prices-promo__icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(229, 160, 13, 0.12);
-  color: var(--color-primary);
+  background: rgba(34, 158, 217, 0.12);
+  color: var(--color-telegram, #229ed9);
   flex: 0 0 auto;
-  font-size: 1.35rem;
+  font-size: 1.6rem;
 }
 
 .prices-promo__title {
-  margin: 0 0 6px;
+  margin: 0;
   font-weight: 800;
   color: var(--color-dark);
-  font-size: 1.1rem;
+  font-size: 1.25rem;
 }
 
 .prices-promo__desc {
@@ -41,9 +43,32 @@
   color: var(--color-text);
   line-height: 1.55;
   font-size: 0.95rem;
+  max-width: 520px;
+}
+
+.prices-promo__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 12px 22px;
+  background: var(--color-telegram, #229ed9);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.prices-promo__btn:hover {
+  background: var(--color-telegram-dark, #1b8bc0);
+  color: #fff;
+  transform: translateY(-1px);
 }
 
 .price-card {
+  position: relative;
   display: block;
   background: #fff;
   border-radius: var(--radius);
@@ -61,6 +86,7 @@
 
 .price-card__img-wrap {
   position: relative;
+  display: block;
   aspect-ratio: 16/10;
   overflow: hidden;
   background: var(--color-bg-light);
@@ -76,31 +102,23 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  background: rgba(26, 32, 44, 0.9);
-  color: var(--color-primary);
+  background: rgba(34, 158, 217, 0.95);
+  color: #fff;
   font-size: 0.85rem;
   font-weight: 700;
   padding: 8px 14px;
   border-radius: var(--radius-sm);
   display: inline-flex;
-  flex-direction: column;
-  gap: 2px;
-  align-items: flex-end;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  z-index: 2;
+  transition: background 0.2s;
 }
 
-.price-card__badge-new {
-  color: var(--color-primary);
-  line-height: 1.1;
-  white-space: nowrap;
-}
-
-.price-card__badge-old {
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-decoration: line-through;
-  text-decoration-thickness: 2px;
-  text-decoration-color: rgba(229, 160, 13, 0.9);
+.price-card__badge--telegram:hover {
+  background: var(--color-telegram-dark, #1b8bc0);
+  color: #fff;
 }
 
 .price-card__body {
@@ -121,12 +139,13 @@
 }
 
 .price-card__link {
-  color: var(--color-primary);
+  color: var(--color-telegram, #229ed9);
   font-weight: 600;
   font-size: 0.95rem;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  text-decoration: none;
 }
 
 .price-card:hover .price-card__link {

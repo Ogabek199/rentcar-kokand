@@ -2,26 +2,42 @@ import React, { useRef } from "react";
 import { Container } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
 import "../../styles/header.css";
+import { useTranslation } from "../../i18n/LanguageContext";
+import CustomSelect from "../UI/CustomSelect";
 
 const navLinks = [
-  { path: "/home", display: "Bosh sahifa" },
-  { path: "/cars", display: "Avtomobillar" },
-  { path: "/prices", display: "Narxlar" },
-  { path: "/about", display: "Biz haqimizda" },
-  { path: "/contact", display: "Bog'lanish" },
+  { path: "/", key: "nav.home" },
+  { path: "/cars", key: "nav.cars" },
+  { path: "/prices", key: "nav.prices" },
+  { path: "/about", key: "nav.about" },
+  // { path: "/about-me", display: "Dasturchi haqida" },
+  { path: "/contact", key: "nav.contact" },
+];
+
+const LANG_OPTIONS = [
+  { value: "uz", label: "🇺🇿 UZ" },
+  { value: "en", label: "🇬🇧 EN" },
+  { value: "ru", label: "🇷🇺 RU" },
 ];
 
 const Header = () => {
   const menuRef = useRef(null);
+  const { t, language, setLanguage } = useTranslation();
   const toggleMenu = () => menuRef.current?.classList.toggle("menu__active");
 
   return (
     <header className="header header--new">
       <Container>
         <div className="header__inner">
-          <Link to="/home" className="header__logo">
-            <i className="ri-car-line"></i>
-            <span>Ziyo Rent Car</span>
+          <Link to="/" className="header__logo">
+            <img
+              src="/logo.jpg"
+              alt={t("header.logo")}
+              className="header__logo-img"
+              width="44"
+              height="44"
+            />
+            <span>{t("header.logo")}</span>
           </Link>
 
           <nav className="header__nav" ref={menuRef}>
@@ -29,7 +45,7 @@ const Header = () => {
               type="button"
               className="header__close"
               onClick={toggleMenu}
-              aria-label="Menyuni yopish"
+              aria-label={t("header.closeMenu")}
             >
               <i className="ri-close-line"></i>
             </button>
@@ -37,6 +53,7 @@ const Header = () => {
               {navLinks.map((item) => (
                 <NavLink
                   to={item.path}
+                  end={item.path === "/"}
                   className={({ isActive }) =>
                     isActive
                       ? "header__link header__link--active"
@@ -45,19 +62,35 @@ const Header = () => {
                   key={item.path}
                   onClick={toggleMenu}
                 >
-                  {item.display}
+                  {t(item.key)}
                 </NavLink>
               ))}
             </div>
           </nav>
 
           <div className="header__right">
-            <a href="tel:+998937120057" className="header__phone">
-              <i className="ri-phone-line"></i>+998 93 712 00 57
+            <div className="header__langs">
+              <CustomSelect
+                className="custom-select-root--header"
+                variant="compact"
+                options={LANG_OPTIONS}
+                value={language}
+                onChange={setLanguage}
+                ariaLabel={t("header.language")}
+              />
+            </div>
+            <a href="tel:+998776344747" className="header__phone">
+              <i className="ri-phone-line"></i>+998776344747
             </a>
-            <Link to="/contact" className="header__cta">
-              Murojat uchun
-            </Link>
+            <a
+              href="https://t.me/RendcarQoqon"
+              target="_blank"
+              rel="noreferrer"
+              className="header__cta"
+            >
+              <i className="ri-telegram-fill"></i>
+              {t("header.apply")}
+            </a>
           </div>
 
           <button

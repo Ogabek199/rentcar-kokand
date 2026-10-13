@@ -1,6 +1,7 @@
 const blogData = [
   {
     id: 1,
+    slug: "avtomobil-haydashning-eng-yaxshi-usuli",
     title: "Avtomobil haydashning eng yaxshi usuli",
     author: "Sanjar",
     date: "12 dekabr, 2020 yil",
@@ -12,6 +13,7 @@ const blogData = [
 
   {
     id: 2,
+    slug: "agar-mashinangiz-akkumulyatori-ochirilgan-bolsa",
     title: "Agar mashinangiz akkumulyatori o'chirilgan bo'lsa",
     author: "Rustambek",
     date: "12 dekabr, 2020 yil",
@@ -23,6 +25,7 @@ const blogData = [
 
   {
     id: 3,
+    slug: "sayohat-qilishning-eng-yaxshi-usuli",
     title: "Sayohat qilishning eng yaxshi usuli",
     author: "Bexruz",
     date: "12 dekabr, 2020 yil",

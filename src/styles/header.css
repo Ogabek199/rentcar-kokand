@@ -1,11 +1,29 @@
-/* ========== New UI Header (rasmdagi dizayn) ========== */
+/* ========== New UI Header – rasmdagidek: pill shakl, liquid glass ========== */
 .header--new {
-  background: #fff;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
-  padding: 14px 0;
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  right: 16px;
   z-index: 1000;
+  padding: 12px 0;
+  border-radius: 9999px;
+  max-width: calc(100vw - 32px);
+  margin: 0 auto;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+
+  /* Liquid glass (shisha) – rasmdagidek frosted */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 252, 248, 0.55) 0%,
+    rgba(248, 246, 243, 0.35) 50%,
+    rgba(255, 251, 245, 0.5) 100%
+  );
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
 }
 
 .header__inner {
@@ -21,13 +39,26 @@
   gap: 8px;
   text-decoration: none;
   color: var(--color-dark);
-  font-weight: 700;
-  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
 }
 
 .header__logo i {
   color: var(--color-primary);
   font-size: 1.5rem;
+}
+
+.header__logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: block;
+  background: #000;
+  box-shadow: 0 2px 8px rgba(18, 24, 38, 0.12);
 }
 
 .header__nav {
@@ -70,6 +101,27 @@
   gap: 16px;
 }
 
+.header__langs {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.header__langs .custom-select-root {
+  min-width: 96px;
+}
+
+.header__langs .custom-select__control {
+  cursor: pointer;
+}
+
+.header__langs .custom-select__menu {
+  min-width: 120px;
+}
+
 .header__phone {
   display: flex;
   align-items: center;
@@ -89,18 +141,25 @@
 }
 
 .header__cta {
-  background: var(--color-primary) !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-telegram) !important;
   color: #fff !important;
-  padding: 10px 20px;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: background 0.2s;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  border: none;
+  box-shadow: 0 8px 20px rgba(34, 158, 217, 0.3);
 }
 
 .header__cta:hover {
-  background: var(--color-primary-dark) !important;
+  background: var(--color-telegram-dark) !important;
   color: #fff !important;
+  box-shadow: 0 10px 24px rgba(34, 158, 217, 0.4);
+  transform: translateY(-1px);
 }
 
 .header__toggle {
@@ -117,6 +176,11 @@
   display: none;
 }
 
+/* Kontent fixed header (pill) ostida boshlansin */
+.layout__content {
+  padding-top: 88px;
+}
+
 @media (max-width: 992px) {
   .header__phone {
     display: none;
@@ -128,12 +192,23 @@
     right: 0;
     width: 280px;
     height: 100vh;
-    background: #fff;
-    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+    background: rgba(248, 248, 250, 0.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: -8px 0 28px rgba(0, 0, 0, 0.22);
     padding: 80px 24px 24px;
     transform: translateX(100%);
     transition: transform 0.3s ease;
     z-index: 999;
+  }
+
+  .header__nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(244, 244, 247, 0.92) 100%);
+    pointer-events: none;
   }
 
   .header__close {
@@ -166,6 +241,8 @@
   }
 
   .header__menu {
+    position: relative;
+    z-index: 1;
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
@@ -184,13 +261,81 @@
   }
 }
 
-@media (max-width: 576px) {
-  .header__logo span {
+@media (max-width: 768px) {
+  .header--new {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 8px 0;
+    border-radius: 20px;
+    max-width: calc(100vw - 16px);
+  }
+
+  .header__inner {
+    gap: 10px;
+  }
+
+  .header__logo {
     font-size: 1rem;
+    min-width: 0;
+  }
+
+  .header__logo i {
+    font-size: 1.2rem;
+  }
+
+  .header__logo-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+
+  .header__logo span {
+    white-space: nowrap;
+    font-size: 0.95rem;
+  }
+
+  .header__right {
+    gap: 8px;
+  }
+
+  .header__langs {
+    padding: 3px;
+    gap: 4px;
+  }
+
+  .header__lang-btn {
+    font-size: 0.7rem;
+    padding: 5px 8px;
   }
 
   .header__cta {
-    padding: 8px 14px;
-    font-size: 0.85rem;
+    padding: 7px 10px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .layout__content {
+    padding-top: 84px;
+  }
+}
+
+@media (max-width: 576px) {
+  .header__logo span {
+    font-size: 0.88rem;
+  }
+
+  .header__logo-img {
+    width: 34px;
+    height: 34px;
+    border-radius: 7px;
+  }
+
+  .header__cta {
+    display: none;
+  }
+
+  .layout__content {
+    padding-top: 78px;
   }
 }

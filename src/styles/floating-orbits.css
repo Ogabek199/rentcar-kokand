@@ -1,0 +1,142 @@
+/* Sayt atrofida aylanib yuradigan dekorativ elementlar */
+.floating-orbits {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.layout__wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.floating-orbits__orb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(229, 160, 13, 0.15) 0%,
+    rgba(229, 160, 13, 0.05) 50%,
+    transparent 70%
+  );
+  animation: orbit-float 25s linear infinite;
+  will-change: transform;
+}
+
+.floating-orbits__orb--1 {
+  width: 280px;
+  height: 280px;
+  top: -80px;
+  right: -80px;
+  animation-duration: 30s;
+  animation-delay: 0s;
+}
+
+.floating-orbits__orb--2 {
+  width: 200px;
+  height: 200px;
+  bottom: -60px;
+  left: -60px;
+  animation-duration: 35s;
+  animation-delay: -8s;
+  animation-direction: reverse;
+}
+
+.floating-orbits__orb--3 {
+  width: 160px;
+  height: 160px;
+  top: 40%;
+  left: -40px;
+  animation-duration: 28s;
+  animation-delay: -15s;
+}
+
+.floating-orbits__orb--4 {
+  width: 220px;
+  height: 220px;
+  bottom: 20%;
+  right: -70px;
+  animation-duration: 32s;
+  animation-delay: -5s;
+  animation-direction: reverse;
+}
+
+.floating-orbits__orb--5 {
+  width: 120px;
+  height: 120px;
+  top: 15%;
+  left: 15%;
+  animation-duration: 40s;
+  animation-delay: -20s;
+  opacity: 0.6;
+}
+
+/* Har bir orb o‘z joyida aylana harakat qiladi */
+@keyframes orbit-circle {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(25px, -25px) scale(1.08); }
+  50% { transform: translate(-20px, -35px) scale(0.95); }
+  75% { transform: translate(-30px, 15px) scale(1.05); }
+}
+
+@keyframes orbit-circle-reverse {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-20px, 20px) scale(0.95); }
+  50% { transform: translate(15px, 30px) scale(1.1); }
+  75% { transform: translate(28px, -18px) scale(0.98); }
+}
+
+.floating-orbits__orb--1 {
+  animation: orbit-circle 22s ease-in-out infinite;
+}
+
+.floating-orbits__orb--2 {
+  animation: orbit-circle-reverse 28s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.floating-orbits__orb--3 {
+  animation: orbit-circle 25s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+.floating-orbits__orb--4 {
+  animation: orbit-circle-reverse 30s ease-in-out infinite;
+  animation-delay: -15s;
+}
+
+.floating-orbits__orb--5 {
+  animation: orbit-circle 20s ease-in-out infinite;
+  animation-delay: -8s;
+}
+
+/* Viewport atrofi bo‘ylab aylanib yuradigan halqa */
+.floating-orbits__ring {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(229, 160, 13, 0.35);
+  box-shadow: 0 0 20px rgba(229, 160, 13, 0.2);
+  top: 20px;
+  left: 20px;
+  animation: orbit-perimeter 20s linear infinite;
+}
+
+@keyframes orbit-perimeter {
+  0% { top: 20px; left: 20px; }
+  25% { top: 20px; left: calc(100% - 20px); }
+  50% { top: calc(100% - 20px); left: calc(100% - 20px); }
+  75% { top: calc(100% - 20px); left: 20px; }
+  100% { top: 20px; left: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-orbits__orb,
+  .floating-orbits__ring {
+    animation: none;
+    opacity: 0.4;
+  }
+}
