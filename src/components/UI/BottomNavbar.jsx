@@ -8,7 +8,7 @@ const BottomNavbar = () => {
   const { t } = useTranslation();
 
   const navItems = [
-    { path: "/home", icon: "ri-home-line", activeIcon: "ri-home-fill", key: "bottomNav.home" },
+    { path: "/", icon: "ri-home-line", activeIcon: "ri-home-fill", key: "bottomNav.home" },
     { path: "/cars", icon: "ri-car-line", activeIcon: "ri-car-fill", key: "bottomNav.cars" },
     { path: "/prices", icon: "ri-price-tag-3-line", activeIcon: "ri-price-tag-3-fill", key: "bottomNav.prices" },
     { path: "/about", icon: "ri-information-line", activeIcon: "ri-information-fill", key: "bottomNav.about" },
@@ -16,7 +16,7 @@ const BottomNavbar = () => {
   ];
 
   const isActive = (path) => {
-    if (path === "/home") return location.pathname === "/home" || location.pathname === "/";
+    if (path === "/") return location.pathname === "/" || location.pathname === "/home";
     return location.pathname === path || location.pathname.startsWith(path + "/");
   };
 

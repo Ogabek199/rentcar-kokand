@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import "../../styles/filter-sort.css";
 import { useTranslation } from "../../i18n/LanguageContext";
+import CustomSelect from "./CustomSelect";
 
 const FilterSort = ({ onFilterChange, onSortChange, searchComponent }) => {
   const { t } = useTranslation();
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
-    priceRange: "all",
     transmission: "all",
-    minPrice: "",
-    maxPrice: "",
   });
   const [sortBy, setSortBy] = useState("default");
+
+  const sortOptions = useMemo(
+    () => [
+      { value: "default", label: t("filter.default") },
+      { value: "name-asc", label: t("filter.nameAsc") },
+      { value: "name-desc", label: t("filter.nameDesc") },
+    ],
+    [t]
+  );
 
   const handleFilterChange = (key, value) => {
     const newFilters = { ...filters, [key]: value };
@@ -26,10 +33,7 @@ const FilterSort = ({ onFilterChange, onSortChange, searchComponent }) => {
 
   const handleReset = () => {
     const resetFilters = {
-      priceRange: "all",
       transmission: "all",
-      minPrice: "",
-      maxPrice: "",
     };
     setFilters(resetFilters);
     setSortBy("default");
@@ -64,18 +68,14 @@ const FilterSort = ({ onFilterChange, onSortChange, searchComponent }) => {
             <i className="ri-sort-desc"></i>
             {t("filter.sort")}
           </label>
-          <select
+          <CustomSelect
             id="sort-select"
-            className="filter-sort__select"
+            options={sortOptions}
             value={sortBy}
-            onChange={(e) => handleSortChange(e.target.value)}
-          >
-            <option value="default">{t("filter.default")}</option>
-            <option value="price-low">{t("filter.priceLow")}</option>
-            <option value="price-high">{t("filter.priceHigh")}</option>
-            <option value="name-asc">{t("filter.nameAsc")}</option>
-            <option value="name-desc">{t("filter.nameDesc")}</option>
-          </select>
+            onChange={handleSortChange}
+            ariaLabel={t("filter.sort")}
+            className="filter-sort__custom-select"
+          />
         </div>
       </div>
 
@@ -108,27 +108,6 @@ const FilterSort = ({ onFilterChange, onSortChange, searchComponent }) => {
               >
                 {t("filter.manual")}
               </button>
-            </div>
-          </div>
-
-          <div className="filter-sort__group">
-            <label className="filter-sort__label">{t("filter.priceRange")}</label>
-            <div className="filter-sort__price-range">
-              <input
-                type="number"
-                className="filter-sort__price-input"
-                placeholder={t("filter.min")}
-                value={filters.minPrice}
-                onChange={(e) => handleFilterChange("minPrice", e.target.value)}
-              />
-              <span>-</span>
-              <input
-                type="number"
-                className="filter-sort__price-input"
-                placeholder={t("filter.max")}
-                value={filters.maxPrice}
-                onChange={(e) => handleFilterChange("maxPrice", e.target.value)}
-              />
             </div>
           </div>
 

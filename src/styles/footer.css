@@ -1,8 +1,11 @@
-/* ========== New UI Footer (rasmdagi dizayn) ========== */
+/* ========== Footer ========== */
 .footer--new {
-  background: var(--color-dark);
-  padding: 56px 0 0;
+  background:
+    radial-gradient(700px 240px at 0% 0%, rgba(229, 160, 13, 0.14), transparent 55%),
+    linear-gradient(180deg, #161d2c 0%, #0f1420 100%);
+  padding: 64px 0 0;
   color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .footer__brand {
@@ -25,6 +28,16 @@
   font-size: 1.5rem;
 }
 
+.footer__logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: block;
+  background: #000;
+}
+
 .footer__desc {
   color: rgba(255, 255, 255, 0.75);
   font-size: 0.9rem;
@@ -38,18 +51,23 @@
 }
 
 .footer__social a {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.8);
+  color: #fff;
   font-size: 1.2rem;
-  transition: color 0.2s;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
 }
 
 .footer__social a:hover {
-  color: var(--color-primary);
+  background: var(--color-telegram);
+  border-color: transparent;
+  transform: translateY(-2px);
 }
 
 .footer__title {

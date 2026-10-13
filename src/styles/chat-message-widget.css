@@ -17,6 +17,20 @@
   cursor: pointer;
 }
 
+.chat-widget__toggle--telegram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #229ed9;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(34, 158, 217, 0.35);
+}
+
+.chat-widget__toggle--telegram:hover {
+  background: #1b8bc0;
+  color: #fff;
+}
+
 .chat-widget__panel {
   width: min(340px, calc(100vw - 24px));
   margin-bottom: 12px;

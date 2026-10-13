@@ -30,8 +30,9 @@
 .contact-card {
   background: #fff;
   border-radius: var(--radius);
-  padding: 32px;
+  padding: 36px 32px;
   box-shadow: var(--shadow);
+  border: 1px solid rgba(18, 24, 38, 0.06);
 }
 
 .contact-card__title {
@@ -39,6 +40,38 @@
   font-weight: 700;
   color: var(--color-dark);
   margin-bottom: 24px;
+}
+
+.contact-card__hint {
+  margin: 0 0 20px;
+  font-size: 1rem;
+  color: var(--color-text-muted, #64748b);
+  line-height: 1.5;
+}
+
+.contact-card__channel {
+  margin: 14px 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #229ed9;
+}
+
+.contact-form__btn--telegram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  background: var(--color-telegram);
+  border-radius: 999px;
+  padding: 14px 28px;
+  box-shadow: 0 10px 24px rgba(34, 158, 217, 0.3);
+}
+
+.contact-form__btn--telegram:hover:not(:disabled) {
+  background: var(--color-telegram-dark);
+  color: #fff;
+  transform: translateY(-1px);
 }
 
 .contact-form__group {

@@ -4,13 +4,13 @@ import { Container, Row, Col } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import { useParams, Link } from "react-router-dom";
 import BookingForm from "../components/UI/BookingForm";
-import PriceCalculator from "../components/UI/PriceCalculator";
 import { ImageGallery } from "../components/UI/ImageLightbox";
 import CarItem from "../components/UI/CarItem";
 import { logError } from "../utils/errorLogger";
 import "../styles/car-details.css";
-import { applyCarDiscount } from "../utils/carPromo";
 import { slugify } from "../utils/slugify";
+
+const TELEGRAM_URL = "https://t.me/RendcarQoqon";
 
 const REVIEWS_STORAGE_KEY = "car_reviews";
 
@@ -49,12 +49,6 @@ const saveReview = (carSlug, review) => {
     });
   }
 };
-
-const formatCurrency = (value) =>
-  new Intl.NumberFormat("uz-UZ", {
-    style: "decimal",
-    maximumFractionDigits: 0,
-  }).format(value);
 
 const INCLUDED = [
   "Cheksiz kilometr",
@@ -116,7 +110,7 @@ const ReviewFormInline = ({ onClose, onSubmit }) => {
           className="review-form-inline__input"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          placeholder="+998 77 634 47 47"
+          placeholder="+998776344747"
         />
         <label className="review-form-inline__label">Baholash</label>
         <div className="review-form-inline__stars">
@@ -212,12 +206,14 @@ const CarDetails = () => {
 
   const canonicalSlug = singleCarItem.slug || slugify(singleCarItem.carName);
   const similarCars = carData.filter((c) => c.id !== singleCarItem.id).slice(0, 4);
-  const { discounted: discountedPrice, original: originalPrice } = applyCarDiscount(singleCarItem.price);
   const origin =
     typeof window !== "undefined" && window.location?.origin
       ? window.location.origin
       : "https://rentcar-kokand.uz";
   const pageUrl = `${origin}/cars/${canonicalSlug}`;
+  const telegramHref = `${TELEGRAM_URL}?text=${encodeURIComponent(
+    `Assalomu alaykum! ${singleCarItem.carName} mashinasi kerak. Narxini bilmoqchiman.`
+  )}`;
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -231,16 +227,19 @@ const CarDetails = () => {
     offers: {
       "@type": "Offer",
       url: pageUrl,
-      priceCurrency: "UZS",
-      price: discountedPrice,
       availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "Ziyo Rent Car",
+      },
     },
   };
 
   return (
     <Helmet
       title={singleCarItem.carName}
-      description={`${singleCarItem.carName} avtomobilini Kokandda ijaraga oling. Chegirmali kunlik narx: ${formatCurrency(discountedPrice)} so‘m. Qulay shartlar, 24/7 xizmat va tez bron qilish.`}
+      description={`${singleCarItem.carName} — Qo‘qonda ijaraga oling. Narx va bron: Telegram @RendcarQoqon yoki +998776344747. Ziyo Rent Car.`}
+      keywords={`${singleCarItem.carName} ijarasi, ${singleCarItem.brand} rent car Qo‘qon, avtomobil ijarasi`}
       canonicalPath={`/cars/${canonicalSlug}`}
       image={singleCarItem.imgUrl}
       type="product"
@@ -267,11 +266,16 @@ const CarDetails = () => {
                 </p>
 
                 <div className="car-details__hero-img-wrap animate-on-scroll animate-scale-in">
-                  <span className="car-details__price-label">BOSHLANG'ICH NARX</span>
-                  <span className="car-details__price-value">
-                    {discountedPrice} so'm / kun
-                    <span className="car-details__price-old">{originalPrice} so'm</span>
-                  </span>
+                  <a
+                    href={telegramHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="car-details__price-ask"
+                  >
+                    <i className="ri-telegram-fill"></i>
+                    <span className="car-details__price-label">NARXNI BILISH</span>
+                    <span className="car-details__price-value">Telegramda bilib oling</span>
+                  </a>
                   <div className="car-details__image-wrapper">
                     <ImageGallery images={[singleCarItem.imgUrl]} className="single-image" />
                   </div>
@@ -395,23 +399,13 @@ const CarDetails = () => {
 
             <Col lg="4" className="mt-4">
               <div className="car-details__sidebar animate-on-scroll animate-fade-in-left">
-                <PriceCalculator 
-                  basePrice={discountedPrice} 
-                  discountPercent={10}
-                  className="mb-4"
-                />
-                
                 <div className="reserve-card">
                   <h3 className="reserve-card__title">Mashinani band qilish</h3>
-                  <p className="reserve-card__price">
-                    {discountedPrice} <span>/ kun</span>
-                    <span className="reserve-card__price-old">{originalPrice} so'm</span>
+                  <p className="reserve-card__price reserve-card__price--ask">
+                    Narxni Telegramda bilib oling
                   </p>
-                  <BookingForm formId="booking-form" hideSubmitButton carName={singleCarItem.carName} />
-                  <button type="submit" form="booking-form" className="reserve-card__submit">
-                    Bron qilish →
-                  </button>
-                  <p className="reserve-card__disclaimer">Hozircha to'lov qilinmaydi. Avval mavjudlik tekshiriladi.</p>
+                  <BookingForm carName={singleCarItem.carName} />
+                  <p className="reserve-card__disclaimer">Telegram orqali yozing — tez javob beramiz.</p>
                   <div className="reserve-card__trust">
                     <span><i className="ri-shield-check-line"></i> Xavfsiz</span>
                     <span><i className="ri-time-line"></i> Tez tasdiq</span>

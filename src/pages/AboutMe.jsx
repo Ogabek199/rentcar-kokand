@@ -71,7 +71,7 @@ const AboutMe = () => {
                     className="about-me__contact-item"
                   >
                     <i className="ri-phone-line"></i>
-                    <span>+998 77 634 47 47</span>
+                    <span>+998776344747</span>
                   </a>
                 </div>
               </div>

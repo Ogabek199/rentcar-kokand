@@ -71,39 +71,47 @@
   display: block;
 }
 
-.car-details__price-label {
+.car-details__price-ask {
   position: absolute;
   top: 16px;
   right: 16px;
+  z-index: 3;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 10px 14px;
+  background: rgba(34, 158, 217, 0.95);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.car-details__price-ask:hover {
+  background: var(--color-telegram-dark, #1b8bc0);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.car-details__price-ask i {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.car-details__price-label {
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.05em;
 }
 
 .car-details__price-value {
-  position: absolute;
-  top: 40px;
-  right: 16px;
-  font-size: 1.5rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-primary);
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-}
-
-.car-details__price-old {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: rgba(26, 32, 44, 0.65);
-  text-decoration: line-through;
-  text-decoration-thickness: 2px;
-  text-decoration-color: rgba(229, 160, 13, 0.9);
-  background: rgba(255, 255, 255, 0.78);
-  padding: 2px 8px;
-  border-radius: 999px;
+  color: #fff;
+  line-height: 1.2;
 }
 
 .car-details__tag {
@@ -363,6 +371,13 @@
   font-weight: 700;
   color: var(--color-primary);
   margin-bottom: 20px;
+}
+
+.reserve-card__price--ask {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-telegram, #229ed9);
+  line-height: 1.4;
 }
 
 .reserve-card__price span {

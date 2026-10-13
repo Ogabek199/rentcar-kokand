@@ -21,8 +21,14 @@ const Footer = () => {
         <Row className="footer__row">
           <Col lg="3" md="6" sm="12" className="mb-4 mb-lg-0">
             <div className="footer__brand">
-              <Link to="/home" className="footer__logo">
-                <i className="ri-car-line"></i>
+              <Link to="/" className="footer__logo">
+                <img
+                  src="/logo.jpg"
+                  alt="Ziyo Rent Car"
+                  className="footer__logo-img"
+                  width="44"
+                  height="44"
+                />
                 <span>Ziyo Rent Car</span>
               </Link>
               <p className="footer__desc">
@@ -64,7 +70,7 @@ const Footer = () => {
               </li>
               <li>
                 <i className="ri-phone-line"></i>
-                <a href="tel:+998776344747">+998 77 634 47 47</a>
+                <a href="tel:+998776344747">+998776344747</a>
               </li>
             </ul>
           </Col>

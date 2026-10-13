@@ -122,28 +122,32 @@
   gap: 8px;
 }
 
-.quick-view-modal__price-current {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
+.quick-view-modal__price--telegram {
+  padding: 14px 16px;
+  background: rgba(34, 158, 217, 0.08);
+  border: 1px solid rgba(34, 158, 217, 0.2);
+  border-radius: var(--radius-sm);
 }
 
-.quick-view-modal__price-value {
-  font-size: 2rem;
+.quick-view-modal__price-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.45;
+}
+
+.quick-view-modal__telegram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-telegram, #229ed9);
+  text-decoration: none;
+  font-size: 0.95rem;
 }
 
-.quick-view-modal__price-period {
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  font-weight: 500;
-}
-
-.quick-view-modal__price-old {
-  font-size: 1.1rem;
-  color: var(--color-text-muted);
-  text-decoration: line-through;
+.quick-view-modal__telegram-link:hover {
+  color: var(--color-telegram-dark, #1b8bc0);
 }
 
 .quick-view-modal__description {

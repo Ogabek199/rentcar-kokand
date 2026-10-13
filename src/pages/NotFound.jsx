@@ -14,7 +14,7 @@ const NotFound = () => {
           <p style={{ color: "var(--color-text-muted)", marginBottom: 24 }}>
             {t("carListing.notFoundText")}
           </p>
-          <Link to="/home" className="btn-outline">
+          <Link to="/" className="btn-outline">
             {t("nav.home")}
           </Link>
         </Container>

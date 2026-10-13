@@ -110,6 +110,39 @@
   transform: translateY(-2px);
 }
 
+.booking-form--telegram {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.booking-form__telegram-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted, #64748b);
+  line-height: 1.45;
+}
+
+.booking-form__btn--telegram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  text-decoration: none;
+  background: var(--color-telegram);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(34, 158, 217, 0.35);
+}
+
+.booking-form__btn--telegram:hover {
+  background: var(--color-telegram-dark);
+  box-shadow: 0 12px 28px rgba(34, 158, 217, 0.45);
+  color: #fff;
+}
+
 /* Eski klasslar (boshqa sahifalarda ishlatilishi mumkin) */
 .booking__form {
   width: 100%;

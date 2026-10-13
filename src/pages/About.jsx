@@ -10,7 +10,8 @@ const About = () => {
   return (
     <Helmet
       title={t("nav.about")}
-      description="Ziyo Rent Car haqida: premium avtomobil ijarasi, 24/7 qo‘llab-quvvatlash, toza mashinalar va tez bron qilish. Kokand va Farg‘ona vodiysida ishonchli xizmat."
+      description="Ziyo Rent Car haqida: Qo‘qonda premium avtomobil ijarasi, 24/7 qo‘llab-quvvatlash, toza mashinalar. Bron — Telegram @RendcarQoqon yoki +998776344747."
+      keywords="Ziyo Rent Car haqida, rent car Qo‘qon, avtomobil ijarasi kompaniyasi"
       canonicalPath="/about"
     >
       <CommonSection title={t("nav.about")} />

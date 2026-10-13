@@ -1,8 +1,7 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import "../../styles/car-item.css";
-import { applyCarDiscount } from "../../utils/carPromo";
 import FavoriteButton from "./FavoriteButton";
 import QuickViewModal from "./QuickViewModal";
 import { slugify } from "../../utils/slugify";
@@ -10,15 +9,11 @@ import { useTranslation } from "../../i18n/LanguageContext";
 
 import malibu from "../../assets/all-images/cars-img/bmw-offer.png";
 
-const formatCurrency = (value) =>
-  new Intl.NumberFormat("uz-UZ", {
-    style: "decimal",
-    maximumFractionDigits: 0,
-  }).format(value);
+const TELEGRAM_URL = "https://t.me/RendcarQoqon";
 
 const CarItem = React.memo((props) => {
   const { t } = useTranslation();
-  const { imgUrl, carName, automatic, price, rating = 4.8, slug } = props.item;
+  const { imgUrl, carName, automatic, rating = 4.8, slug } = props.item;
   
   const [imgSrc, setImgSrc] = useState(imgUrl);
   
@@ -30,22 +25,11 @@ const CarItem = React.memo((props) => {
     setImgSrc(imgUrl);
   }, [imgUrl]);
 
-  // Narxlarni memoize qilish - faqat price o'zgarganda qayta hisoblash
-  const { discounted, original } = useMemo(
-    () => applyCarDiscount(price),
-    [price]
-  );
-
   const [showQuickView, setShowQuickView] = useState(false);
   
   // Use custom col props if provided, otherwise use default
   const colProps = props.colProps || { lg: "4", md: "6", sm: "6" };
 
-  // Formatlangan narxlarni memoize qilish
-  const formattedDiscounted = useMemo(() => formatCurrency(discounted), [discounted]);
-  const formattedOriginal = useMemo(() => formatCurrency(original), [original]);
-
-  // Handler'larni memoize qilish
   const handleQuickViewOpen = useCallback(() => {
     setShowQuickView(true);
   }, []);
@@ -53,6 +37,10 @@ const CarItem = React.memo((props) => {
   const handleQuickViewClose = useCallback(() => {
     setShowQuickView(false);
   }, []);
+
+  const telegramHref = `${TELEGRAM_URL}?text=${encodeURIComponent(
+    t("booking.telegramMessage").replace("{{car}}", carName)
+  )}`;
 
   return (
     <>
@@ -69,15 +57,16 @@ const CarItem = React.memo((props) => {
               height="300"
               onError={handleImgError}
             />
-            <div className="car__item-price-tag">
-              <div className="car__item-price-row">
-                <span className="car__item-price-new">
-                  {formattedDiscounted} {t("common.som")}
-                </span>
-                <span className="car__item-price-per">{t("common.perDay")}</span>
-              </div>
-              <span className="car__item-price-old">{formattedOriginal} {t("common.som")}</span>
-            </div>
+            <a
+              href={telegramHref}
+              target="_blank"
+              rel="noreferrer"
+              className="car__item-price-tag car__item-price-tag--telegram"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <i className="ri-telegram-fill"></i>
+              <span>{t("common.askPrice")}</span>
+            </a>
             <div className="car__item-actions">
               <FavoriteButton carId={props.item.id} size="medium" />
               <button

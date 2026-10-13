@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Container, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 import Helmet from "../components/Helmet/Helmet";
@@ -6,15 +6,17 @@ import HeroSlider from "../components/UI/HeroSlider";
 import AboutSection from "../components/UI/AboutSection";
 import carData from "../assets/data/carData";
 import CarItem from "../components/UI/CarItem";
-import Testimonial from "../components/UI/Testimonial";
 import { useTranslation } from "../i18n/LanguageContext";
+
+const Testimonial = lazy(() => import("../components/UI/Testimonial"));
 
 const Home = () => {
   const { t } = useTranslation();
   return (
     <Helmet
-      title={t("home.title")}
-      description="Kokandda premium avtomobil ijarasi: arzon narxlar, qulay xizmat va ishonchli avtopark. Tez bron qiling va mashinani uyigacha yetkazib berishdan bahramand bo‘ling."
+      title="Qo‘qonda avtomobil ijarasi"
+      description="Ziyo Rent Car — Qo‘qonda premium avtomobil ijarasi. Malibu, Gentra, Equinox, Tahoe va Captiva. Telegram @RendcarQoqon orqali tez bron qiling. Tel: +998776344747"
+      keywords="avtomobil ijarasi Qo‘qon, rent car Kokand, Ziyo Rent Car, mashina ijarasi, Telegram @RendcarQoqon"
       canonicalPath="/"
     >
       <section className="p-0 hero__slider-section hero__slider-section--new">
@@ -31,7 +33,7 @@ const Home = () => {
             <span className="section-head__line" />
           </div>
           <Row>
-            {carData.slice(0, 6).map((item, index) => (
+            {carData.slice(0, 6).map((item) => (
               <CarItem item={item} key={item.id} />
             ))}
           </Row>
@@ -51,7 +53,9 @@ const Home = () => {
             <span className="section-head__line" />
           </div>
           <div className="animate-on-scroll animate-scale-in">
-            <Testimonial />
+            <Suspense fallback={null}>
+              <Testimonial />
+            </Suspense>
           </div>
         </Container>
       </section>
@@ -62,12 +66,18 @@ const Home = () => {
             <h2 className="cta-box__title">{t("home.ctaTitle")}</h2>
             <p className="cta-box__text">{t("home.ctaText")}</p>
             <div className="cta-box__buttons">
-              <Link to="/cars" className="cta-box__btn cta-box__btn--primary">
+              <a
+                href="https://t.me/RendcarQoqon"
+                target="_blank"
+                rel="noreferrer"
+                className="cta-box__btn cta-box__btn--primary"
+              >
+                <i className="ri-telegram-fill"></i>
                 {t("home.bookNow")}
-              </Link>
-              <a href="tel:+998776344747" className="cta-box__btn cta-box__btn--outline text-white bg-transparent">
+              </a>
+              <a href="tel:+998776344747" className="cta-box__btn cta-box__btn--outline">
                 <i className="ri-phone-line"></i>
-                +998 77 634 47 47
+                +998776344747
               </a>
             </div>
           </div>

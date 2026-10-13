@@ -1,28 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import "../../styles/price-calculator.css";
+import CustomDatePicker from "./CustomDatePicker";
 
 const PriceCalculator = ({ basePrice = 500000, discountPercent = 0 }) => {
   const [days, setDays] = useState(1);
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-  const dateRowRef = useRef(null);
-  const [isDateFocused, setIsDateFocused] = useState(false);
 
-  useEffect(() => {
-    const handleFocus = () => setIsDateFocused(true);
-    const handleBlur = () => setTimeout(() => setIsDateFocused(false), 200);
-    const inputs = dateRowRef.current?.querySelectorAll('input[type="date"]');
-    inputs?.forEach((input) => {
-      input.addEventListener("focus", handleFocus);
-      input.addEventListener("blur", handleBlur);
-    });
-    return () => {
-      inputs?.forEach((input) => {
-        input.removeEventListener("focus", handleFocus);
-        input.removeEventListener("blur", handleBlur);
-      });
-    };
-  }, []);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   const calculateDays = () => {
     if (pickupDate && returnDate) {
@@ -89,38 +75,35 @@ const PriceCalculator = ({ basePrice = 500000, discountPercent = 0 }) => {
           </div>
         </div>
 
-        <div
-          className={`price-calculator__row ${isDateFocused ? "price-calculator__row--date-focused" : ""}`}
-          ref={dateRowRef}
-        >
+        <div className="price-calculator__row">
           <label className="price-calculator__label">Yoki sanalarni tanlang</label>
           <div className="price-calculator__date-group">
-            <div className="price-calculator__date-input">
-              <i className="ri-calendar-line"></i>
-              <input
-                type="date"
-                value={pickupDate}
-                onChange={(e) => {
-                  setPickupDate(e.target.value);
-                  if (e.target.value && returnDate && new Date(e.target.value) > new Date(returnDate)) {
-                    setReturnDate("");
-                  }
-                }}
-                min={new Date().toISOString().split("T")[0]}
-              />
-            </div>
+            <CustomDatePicker
+              className="custom-datepicker--compact"
+              value={pickupDate}
+              minDate={today}
+              selectsStart
+              startDate={pickupDate}
+              endDate={returnDate}
+              onChange={(value) => {
+                setPickupDate(value);
+                if (value && returnDate && value > returnDate) {
+                  setReturnDate("");
+                }
+              }}
+            />
             <span className="price-calculator__arrow">
               <i className="ri-arrow-right-line"></i>
             </span>
-            <div className="price-calculator__date-input">
-              <i className="ri-calendar-line"></i>
-              <input
-                type="date"
-                value={returnDate}
-                onChange={(e) => setReturnDate(e.target.value)}
-                min={pickupDate || new Date().toISOString().split("T")[0]}
-              />
-            </div>
+            <CustomDatePicker
+              className="custom-datepicker--compact"
+              value={returnDate}
+              minDate={pickupDate || today}
+              selectsEnd
+              startDate={pickupDate}
+              endDate={returnDate}
+              onChange={setReturnDate}
+            />
           </div>
         </div>
 

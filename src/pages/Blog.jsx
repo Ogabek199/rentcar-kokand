@@ -10,7 +10,8 @@ const Blog = () => {
   return (
     <Helmet
       title={t("footer.blogs")}
-      description="Ziyo Rent Car bloglari: avtomobil ijarasi bo‘yicha foydali maslahatlar, yangiliklar va yo‘l bo‘yidagi tavsiyalar. Eng so‘nggi maqolalarni o‘qing."
+      description="Ziyo Rent Car blogi: avtomobil haydash, sayohat va texnik maslahatlar. Qo‘qonda mashina ijarasi bo‘yicha foydali maqolalar."
+      keywords="avtomobil blog, haydash maslahatlari, sayohat maslahatlari, rent car blog"
       canonicalPath="/blogs"
     >
       <CommonSection title={t("footer.blogs")} />

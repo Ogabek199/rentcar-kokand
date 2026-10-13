@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { applyCarDiscount } from "../../utils/carPromo";
 import "../../styles/quick-view-modal.css";
 import { slugify } from "../../utils/slugify";
 import { useTranslation } from "../../i18n/LanguageContext";
+
+const TELEGRAM_URL = "https://t.me/RendcarQoqon";
 
 const QuickViewModal = ({ car, isOpen, onClose }) => {
   const { t } = useTranslation();
@@ -34,11 +35,10 @@ const QuickViewModal = ({ car, isOpen, onClose }) => {
 
   if (!isOpen || !car) return null;
 
-  const { discounted, original } = applyCarDiscount(car.price);
   const carSlug = car.slug || slugify(car.carName);
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat("uz-UZ").format(value);
-  };
+  const telegramHref = `${TELEGRAM_URL}?text=${encodeURIComponent(
+    t("booking.telegramMessage").replace("{{car}}", car.carName)
+  )}`;
 
   return (
     <div className="quick-view-modal" onClick={onClose}>
@@ -75,18 +75,18 @@ const QuickViewModal = ({ car, isOpen, onClose }) => {
               </div>
             </div>
 
-            <div className="quick-view-modal__price">
-              <div className="quick-view-modal__price-current">
-                <span className="quick-view-modal__price-value">
-                  {formatCurrency(discounted)} {t("common.som")}
-                </span>
-                <span className="quick-view-modal__price-period">{t("common.perDay")}</span>
-              </div>
-              {discounted < original && (
-                <div className="quick-view-modal__price-old">
-                  {formatCurrency(original)} {t("common.som")}
-                </div>
-              )}
+            <div className="quick-view-modal__price quick-view-modal__price--telegram">
+              <p className="quick-view-modal__price-hint">{t("common.askPriceHint")}</p>
+              <a
+                href={telegramHref}
+                target="_blank"
+                rel="noreferrer"
+                className="quick-view-modal__telegram-link"
+                onClick={onClose}
+              >
+                <i className="ri-telegram-fill"></i>
+                {t("common.askPriceCta")}
+              </a>
             </div>
 
             {car.description && (
@@ -101,13 +101,15 @@ const QuickViewModal = ({ car, isOpen, onClose }) => {
               >
                 {t("common.details")}
               </Link>
-              <Link
-                to={`/cars/${carSlug}?booking=true`}
+              <a
+                href={telegramHref}
+                target="_blank"
+                rel="noreferrer"
                 className="btn btn-outline quick-view-modal__btn"
                 onClick={onClose}
               >
                 {t("home.bookNow")}
-              </Link>
+              </a>
             </div>
           </div>
         </div>

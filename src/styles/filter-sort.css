@@ -86,23 +86,16 @@
   font-size: 1.1rem;
 }
 
-.filter-sort__select {
-  padding: 8px 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+.filter-sort__custom-select {
+  min-width: 180px;
+}
+
+.filter-sort__sort .custom-select__control {
+  min-height: 40px;
   border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: var(--color-text);
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.filter-sort__select:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.7);
 }
 
 .filter-sort__panel {
@@ -238,8 +231,9 @@
     justify-content: space-between;
   }
 
-  .filter-sort__select {
+  .filter-sort__custom-select {
     flex: 1;
+    min-width: 0;
   }
 
   .filter-sort__price-range {

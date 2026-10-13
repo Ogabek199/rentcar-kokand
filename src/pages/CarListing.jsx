@@ -13,10 +13,7 @@ const CarListing = () => {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
-    priceRange: "all",
     transmission: "all",
-    minPrice: "",
-    maxPrice: "",
   });
   const [sortBy, setSortBy] = useState("default");
 
@@ -36,22 +33,8 @@ const CarListing = () => {
       filtered = filtered.filter((car) => car.automatic === filters.transmission);
     }
 
-    // Price filter
-    if (filters.minPrice) {
-      filtered = filtered.filter((car) => car.price >= Number(filters.minPrice));
-    }
-    if (filters.maxPrice) {
-      filtered = filtered.filter((car) => car.price <= Number(filters.maxPrice));
-    }
-
     // Sort
     switch (sortBy) {
-      case "price-low":
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case "price-high":
-        filtered.sort((a, b) => b.price - a.price);
-        break;
       case "name-asc":
         filtered.sort((a, b) => a.carName.localeCompare(b.carName));
         break;
@@ -78,7 +61,8 @@ const CarListing = () => {
   return (
     <Helmet
       title={t("carListing.title")}
-      description="Ziyo Rent Car avtoparki: turli modellardagi avtomobillar, kunlik ijara va qulay shartlar. O'zingizga mos mashinani tanlab, tez bron qiling."
+      description="Ziyo Rent Car avtoparki: Malibu, Gentra, Equinox, Onix, Tahoe, Captiva. Qo‘qonda kunlik ijara — bron uchun Telegram @RendcarQoqon."
+      keywords="avtopark Qo‘qon, Malibu ijarasi, Gentra ijarasi, Equinox ijarasi, Tahoe ijarasi, rent car Kokand"
       canonicalPath="/cars"
     >
       <CommonSection title={t("carListing.sectionTitle")} />

@@ -3,14 +3,21 @@ import { Container } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
 import "../../styles/header.css";
 import { useTranslation } from "../../i18n/LanguageContext";
+import CustomSelect from "../UI/CustomSelect";
 
 const navLinks = [
-  { path: "/home", key: "nav.home" },
+  { path: "/", key: "nav.home" },
   { path: "/cars", key: "nav.cars" },
   { path: "/prices", key: "nav.prices" },
   { path: "/about", key: "nav.about" },
   // { path: "/about-me", display: "Dasturchi haqida" },
   { path: "/contact", key: "nav.contact" },
+];
+
+const LANG_OPTIONS = [
+  { value: "uz", label: "🇺🇿 UZ" },
+  { value: "en", label: "🇬🇧 EN" },
+  { value: "ru", label: "🇷🇺 RU" },
 ];
 
 const Header = () => {
@@ -22,8 +29,14 @@ const Header = () => {
     <header className="header header--new">
       <Container>
         <div className="header__inner">
-          <Link to="/home" className="header__logo">
-            <i className="ri-car-line"></i>
+          <Link to="/" className="header__logo">
+            <img
+              src="/logo.jpg"
+              alt={t("header.logo")}
+              className="header__logo-img"
+              width="44"
+              height="44"
+            />
             <span>{t("header.logo")}</span>
           </Link>
 
@@ -40,6 +53,7 @@ const Header = () => {
               {navLinks.map((item) => (
                 <NavLink
                   to={item.path}
+                  end={item.path === "/"}
                   className={({ isActive }) =>
                     isActive
                       ? "header__link header__link--active"
@@ -56,23 +70,27 @@ const Header = () => {
 
           <div className="header__right">
             <div className="header__langs">
-              <select
-                className="header__lang-select"
+              <CustomSelect
+                className="custom-select-root--header"
+                variant="compact"
+                options={LANG_OPTIONS}
                 value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-                aria-label={t("header.language")}
-              >
-                <option value="uz">🇺🇿 UZ</option>
-                <option value="en">🇬🇧 EN</option>
-                <option value="ru">🇷🇺 RU</option>
-              </select>
+                onChange={setLanguage}
+                ariaLabel={t("header.language")}
+              />
             </div>
             <a href="tel:+998776344747" className="header__phone">
-              <i className="ri-phone-line"></i>+998 77 634 47 47
+              <i className="ri-phone-line"></i>+998776344747
             </a>
-            <Link to="/contact" className="header__cta">
+            <a
+              href="https://t.me/RendcarQoqon"
+              target="_blank"
+              rel="noreferrer"
+              className="header__cta"
+            >
+              <i className="ri-telegram-fill"></i>
               {t("header.apply")}
-            </Link>
+            </a>
           </div>
 
           <button

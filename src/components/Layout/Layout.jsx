@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, Suspense, lazy } from "react";
+import React, { Fragment, useEffect, useRef, useState, Suspense, lazy } from "react";
 import { useLocation } from "react-router-dom";
 
 import Header from "../Header/Header";
@@ -14,9 +14,35 @@ const BottomNavbar = lazy(() => import("../UI/BottomNavbar"));
 const FloatingOrbits = lazy(() => import("../UI/FloatingOrbits"));
 const ChatMessageWidget = lazy(() => import("../UI/ChatMessageWidget"));
 
+const shouldShowOrbits = () => {
+  if (typeof window === "undefined") return false;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+  if (window.matchMedia("(max-width: 768px)").matches) return false;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (connection?.saveData) return false;
+  if (["slow-2g", "2g"].includes(connection?.effectiveType)) return false;
+  return true;
+};
+
 const Layout = () => {
   const location = useLocation();
   const timeoutRef = useRef(null);
+  const [showOrbits, setShowOrbits] = useState(false);
+
+  useEffect(() => {
+    let idleId;
+    let timeoutId;
+    const enable = () => setShowOrbits(shouldShowOrbits());
+    if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(enable, { timeout: 2500 });
+    } else {
+      timeoutId = window.setTimeout(enable, 1200);
+    }
+    return () => {
+      if (idleId && "cancelIdleCallback" in window) window.cancelIdleCallback(idleId);
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }, []);
 
   useEffect(() => {
     // Birinchi marta yuklanganda animatsiyalarni ishga tushirish
@@ -68,9 +94,11 @@ const Layout = () => {
 
   return (
     <Fragment>
-      <Suspense fallback={null}>
-        <FloatingOrbits />
-      </Suspense>
+      {showOrbits ? (
+        <Suspense fallback={null}>
+          <FloatingOrbits />
+        </Suspense>
+      ) : null}
       <div className="layout__wrap">
         <Suspense fallback={null}>
           <ScrollProgress />
